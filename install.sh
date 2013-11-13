@@ -14,7 +14,7 @@ if [ ! -e $PLUGIN_DIR/taglist.vim ];then
 fi
 
 if [ ! -e $PLUGIN_DIR/cscope_map.vim ];then
-    cp cscope_map.vim  $PLUGIN_DIR
+    cp cscope_maps.vim  $PLUGIN_DIR
 fi
 
 
