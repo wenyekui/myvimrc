@@ -7,5 +7,3 @@ fi
 
 cp -rf  plugin/*  $PLUGIN_DIR 
 
-
-
