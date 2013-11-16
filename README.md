@@ -1,5 +1,5 @@
 myvimrc
 =======
 
-My .vimrc
+My .vimrc file and some usefull plugins
 
