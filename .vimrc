@@ -1,11 +1,14 @@
 "pathogen
 execute pathogen#infect()
+execute pathogen#helptags()
 
 "4 spaces tap
 set wrap
 set tabstop=4
 set expandtab	
 set shiftwidth=4
+set showcmd
+set hlsearch
 
 "always keep the status line
 set laststatus=2
@@ -20,38 +23,52 @@ let g:syntastic_python_checkers=['flake8']
 set autoread
 
 
-let mapleader = ";"
 
-"run python
-function! RunPy()
-    !python %
-endfunction
+let mapleader = ";"
 
 function! Run()
     if &filetype=='python'
         !python %
+    elseif &filetype=='shell'
+        !sh %
+    elseif &filetype=='go'
+        !go run %
+    elseif &filetype=='c'
+        write %
+        !gcc %  
+        if filereadable("a.out") 
+            !./a.out;rm -f a.out
+        endif
+    elseif &filetype=='vim'
+        source %
     endif
-endfunction
-
-function! OpenVimrc()
 endfunction
 
 function! FileTypeDet()
     if &filetype=='c'
         abbreviate #inc #include 
+
     endif
 endfunction
 
 autocmd BufNew,BufRead * call FileTypeDet()
+autocmd BufNewFile *.py r ~/.vim/template/skeleton.py
+autocmd BufNewFile *.c r ~/.vim/template/skeleton.c
+autocmd BufNewFile *.htm r ~/.vim/template/skeleton.html
+autocmd BufNewFile *.html r ~/.vim/template/skeleton.html
+autocmd BufNewFile *.go r ~/.vim/template/skeleton.go
 
-"conf for golang
+"conf for golang    
 filetype off
 filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
 filetype plugin indent on
+"go auto fmt 
+autocmd BufWritePre *.go Fmt
 syntax on
 
-"tabe noremap H gT
+"tabe
+noremap H gT
 noremap L gt
 noremap <leader>t :tabe<CR>
 
@@ -80,9 +97,16 @@ noremap <leader>q :q<CR>
 "set autochdir
 
 "key map
-nnoremap <F2> :vs $MYVIMRC<CR>
+noremap <F2> :vs $MYVIMRC<CR>
 noremap <F3> :NERDTree<CR>
-nnoremap <F5> :call Run()<CR>
+noremap <F5> :call Run()<CR>
+noremap <F8> :call Autopep8()<CR>
 
+set t_Co=256
+syntax enable
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
 
-
+set nu
+"syntax on

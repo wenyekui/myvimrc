@@ -1,0 +1,9 @@
+build
+*.pyc
+*.swo
+*.swp
+*.swn
+*.swm
+*.test
+bin
+pkg
