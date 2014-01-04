@@ -2,6 +2,16 @@
 VIMRC_PATH=~/.vimrc
 VIM_PATH=~/.vim
 
+if [ "$(which ctags)" == "" ];then
+    if [ "$(which apt-get)" != "" ];then
+        sudo apt-get install ctags                
+    elif [ "$(which yum)" != "" ];then
+        sudo yum install ctags
+    else
+        echo "not apt-get or yum to install ctags"
+    fi
+fi
+
 cp -f .vimrc $VIMRC_PATH
 echo 'copy .vimrc'
 
