@@ -66,6 +66,8 @@ filetype plugin indent on
 "go auto fmt 
 autocmd BufWritePre *.go Fmt
 syntax on
+"filetype plugin on
+"imap <C-Space> <C-x><C-o>
 
 "tabe
 noremap H gT
@@ -91,6 +93,10 @@ noremap <C-S-l> <C-w>L
 
 "quit
 noremap <leader>q :q<CR>
+"force to quit  
+noremap <leader>Q :q!<CR>
+"write by root 
+noremap <leader>s :w !sudo tee %<CR>
 
 "ctags
 "set tags=~/code/qpush/tags
@@ -105,8 +111,8 @@ noremap <F8> :call Autopep8()<CR>
 set t_Co=256
 syntax enable
 let g:solarized_termcolors=256
-set background=dark
-colorscheme solarized
+"set background=dark
+"colorscheme solarized
 
 set nu
 "syntax on
