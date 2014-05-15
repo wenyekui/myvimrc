@@ -22,6 +22,7 @@ let g:syntastic_python_checkers=['flake8']
 
 set autoread
 
+"e ++ff=unix %
 
 
 let mapleader = ";"
@@ -36,6 +37,12 @@ function! Run()
     elseif &filetype=='c'
         write %
         !gcc %  
+        if filereadable("a.out") 
+            !./a.out;rm -f a.out
+        endif
+    elseif &filetype=='cpp'
+        write %
+        !g++ %  
         if filereadable("a.out") 
             !./a.out;rm -f a.out
         endif
@@ -54,6 +61,7 @@ endfunction
 autocmd BufNew,BufRead * call FileTypeDet()
 autocmd BufNewFile *.py r ~/.vim/template/skeleton.py
 autocmd BufNewFile *.c r ~/.vim/template/skeleton.c
+autocmd BufNewFile *.cpp r ~/.vim/template/skeleton.cpp
 autocmd BufNewFile *.htm r ~/.vim/template/skeleton.html
 autocmd BufNewFile *.html r ~/.vim/template/skeleton.html
 autocmd BufNewFile *.go r ~/.vim/template/skeleton.go
@@ -64,7 +72,8 @@ filetype plugin indent off
 set runtimepath+=$GOROOT/misc/vim
 filetype plugin indent on
 "go auto fmt 
-autocmd BufWritePre *.go Fmt
+"autocmd BufWritePre *.go Fmt
+autocmd BufWritePost *.go !gofmt -w % 
 syntax on
 "filetype plugin on
 "imap <C-Space> <C-x><C-o>
@@ -105,14 +114,15 @@ noremap <leader>s :w !sudo tee %<CR>
 "key map
 noremap <F2> :vs $MYVIMRC<CR>
 noremap <F3> :NERDTree<CR>
+noremap <F4> :vs /etc/hosts<CR>
 noremap <F5> :call Run()<CR>
 noremap <F8> :call Autopep8()<CR>
 
 set t_Co=256
 syntax enable
 let g:solarized_termcolors=256
-"set background=dark
-"colorscheme solarized
+set background=dark
+colorscheme solarized
 
 set nu
 "syntax on
