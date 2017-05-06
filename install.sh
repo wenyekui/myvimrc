@@ -8,8 +8,10 @@ if [ "$(which ctags)" == "" ];then
         sudo apt-get install ctags                
     elif [ "$(which yum)" != "" ];then
         sudo yum install ctags
+    elif [ "$(which brew)" != "" ];then
+        brew install ctags 
     else
-        echo "not apt-get or yum to install ctags"
+        echo "No  package manager to install ctags"
     fi
 fi
 
@@ -19,8 +21,10 @@ if [ "$(which ack)" == "" ];then
         sudo apt-get install ack-grep 
     elif [ "$(which yum)" != "" ];then
         sudo yum install ack
+    elif [ "$(which brew)" != "" ];then
+        brew install ack
     else
-        echo "not apt-get or yum to install ack"
+        echo "No package manager to install ack"
     fi
 fi
 cp -f .vimrc $VIMRC_PATH
