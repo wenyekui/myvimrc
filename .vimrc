@@ -27,6 +27,7 @@ let g:syntastic_python_checkers=['flake8']
 
 
 set autoread
+set noswapfile
 
 "set ve=all
 
@@ -58,12 +59,6 @@ function! Run()
         source %
     elseif &filetype=='javascript'
         !nodejs %
-    endif
-endfunction
-
-function! FileTypeDet()
-    if &filetype=='c'
-        abbreviate #inc #include 
     endif
 endfunction
 
@@ -133,27 +128,10 @@ noremap <F8> :call Autopep8()<CR>
 set t_Co=256
 syntax enable
 let g:solarized_termcolors=256
-"set background=dark
-"colorscheme solarized
+set background=dark
+colorscheme solarized
 
 set nu
+set paste
 "syntax on
-
-"configure tags - add additional tags here or comment out not-used ones
-set tags+=~/.vim/tags/cpp
-set tags+=~/.vim/tags/gl
-set tags+=~/.vim/tags/fl
-"build tags of your own project with CTRL+F12
-map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-   
-" OmniCppComplete
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"] " automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent!  pclose|endif
-set completeopt=menuone,menu,longest,preview
+"
